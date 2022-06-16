@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <div>
+        <h1>Rock, paper, Scissors</h1>          
+        <div class="rps-imgs">
+            <button id="rock"><img src="assets/rock.png"></button>
+            <button id="paper"><img src="assets/paper.png"></button>
+            <button id="scissors"><img src="assets/scissors.png"></button>
+        </div>
+        <div class="rps-stats">
+            <p></p>
+            <h1></h1>
+        </div>
+    </div>
+    <script>
+    function computerPlay() {
+        let random = Math.floor(Math.random() * 3);
+        if (random === 0) {
+            return "rock";
+        } else if (random === 1) {
+            return "paper";
+        } else {
+            return "scissors";
+        }
+    }
+    function playRound(playerSelection, computerSelection) {
+        if (playerSelection === computerSelection) {
+            return "<p style='color:#0d7ceb;'>It's a tie!</p>";
+        } else if (playerSelection === "rock") {
+            if (computerSelection === "paper") {
+                return "<p style='color:#fe2cf0;'>You lose! Paper beats rock.</p>";
+            } else {
+                return "<p style='color:#09d9bd;'>You win! Rock beats scissors.</p>";
+            }
+        } else if (playerSelection === "paper") {
+            if (computerSelection === "scissors") {
+                return "<p style='color:#fe2cf0;'>You lose! Scissors beats paper.</p>";
+            } else {
+                return "<p style='color:#09d9bd;'>You win! Paper beats rock.</p>";
+            }
+        } else if (playerSelection === "scissors") {
+            if (computerSelection === "rock") {
+                return "<p style='color:#fe2cf0;'>You lose! Rock beats scissors.</p>";
+            } else {
+                return "<p style='color:#09d9bd;'>You win! Scissors beats paper.</p>";
+            }
+        }
+    }
+
+    $(document).ready(function() {
+        $("#paper").click(function() {
+            let computerSelection = computerPlay();
+            let result = playRound("paper", computerSelection);
+            $(".rps-stats").html("<h1>" + result + "</h1>");
+        });
+        $("#rock").click(function() {
+            let computerSelection = computerPlay();
+            let result = playRound("rock", computerSelection);
+            $(".rps-stats").html("<h1>" + result + "</h1>");
+        });
+        $("#scissors").click(function() {
+            let computerSelection = computerPlay();
+            let result = playRound("scissors", computerSelection);
+            $(".rps-stats").html("<h1>" + result + "</h1>");
+        });
+    });
+    </script>
+</body>
+<style>
+    body {
+        background-color: #27006f;
+    }
+    h1 {
+        color: #fff;
+        text-align: center;
+        font-size: 50px;
+        font-family: 'Roboto', sans-serif;
+        text-shadow: 5px 5px #000;
+        user-select: none;
+    }
+
+    .rps-imgs {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        width: 100%;
+        user-select: none;
+    }
+
+    .rps-imgs img {
+        padding-top: 25%;
+        width: 250px;
+        height: 250px;
+        margin: 10px;
+        user-select: none;
+    }
+
+    .rps-imgs img:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
+    .rps-imgs button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+    }
+
+    .rps-imgs button:hover {
+        opacity: 0.5;
+    }
+
+    .rps-stats {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        width: 100%;
+        user-select: none;
+    }
+
+    .rps-stats p {
+        color: #fff;
+        font-size: 30px;
+        font-family: 'Roboto', sans-serif;
+        text-shadow: 5px 5px #000;
+        user-select: none;
+    }
+</style>
+</html>
